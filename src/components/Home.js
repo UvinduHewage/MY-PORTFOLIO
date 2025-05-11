@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <Background>
-      <section id="home" className="h-screen flex flex-col justify-center items-center">
+      <section id="home" className="h-screen flex flex-col justify-center items-center pt-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className={`transition-all duration-1000 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
@@ -103,14 +103,14 @@ const Home = () => {
               </div>
               
               {/* Name with animated gradient */}
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 relative">
+              <h1 className="text-5xl md:text-5xl font-bold mb-6 relative">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 animate-gradient-x">
                   Uvindu Hewage
                 </span>
               </h1>
               
               {/* Typing effect */}
-              <div className="h-14 mb-8">
+              <div className="h-14 mb-3">
                 <div className="text-xl md:text-2xl font-medium flex justify-center items-center">
                   <div className="flex items-center">
                     <span className="mr-2 text-cyan-200/80">I'm a</span>
@@ -123,7 +123,7 @@ const Home = () => {
               </div>
               
               {/* Skill icons */}
-              <div className="flex justify-center space-x-6 md:space-x-10 mb-12">
+              <div className="flex justify-center space-x-6 md:space-x-10 mb-8">
                 <div className={`transition-all duration-500 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
                   <div className="w-16 h-16 flex items-center justify-center rounded-full bg-cyan-400/20 hover:bg-cyan-400/30 transition-colors duration-300 group">
                     <Code size={32} className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
@@ -150,11 +150,11 @@ const Home = () => {
               <div className={`transition-all duration-700 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '1000ms' }}>
                 <button 
                   onClick={scrollToNextSection}
-                  className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/20"
+                  className="px-4 py-2 bg-transparent border border-cyan-500/30 rounded-full hover:bg-cyan-500/10 transition-all duration-300 transform hover:scale-105"
                 >
-                  <span className="flex items-center text-white">
-                    Explore My Work
-                    <ChevronDown size={20} className="ml-2 animate-bounce" />
+                  <span className="flex items-center text-cyan-400 text-sm">
+                    Explore
+                    <ChevronDown size={16} className="ml-2 animate-bounce" />
                   </span>
                 </button>
               </div>
