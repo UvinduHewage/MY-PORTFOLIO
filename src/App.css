@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Hide scrollbar but keep functionality */
+body {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure the main container doesn't have overflow issues */
+#root {
+  overflow-x: hidden;
+}
+
+/* Create continuous grid pattern background */
+.grid-background {
+  background-color: #000;
+  overflow: hidden;
+}
+
+.animated-grid {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridAnimation 20s linear infinite;
+}
+
+@keyframes gridAnimation {
+  0% {
+    transform: perspective(500px) rotateX(15deg) translate3d(-5%, -5%, 0);
+  }
+  100% {
+    transform: perspective(500px) rotateX(15deg) translate3d(0, 0, 0);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Create unified glow effect across sections */
+.glow-effect {
+  background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, rgba(0, 0, 0, 0.9) 70%);
+  animation: pulseGlow 8s ease-in-out infinite;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.8; }
 }
