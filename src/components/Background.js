@@ -37,7 +37,7 @@ const Background = ({ children }) => {
         
         .glow-effect {
           background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, rgba(0, 0, 0, 0.9) 70%);
-          animation: pulseGlow 8s ease-in-out infinite;
+          opacity: 0.6;
           z-index: 2;
         }
         
@@ -48,11 +48,6 @@ const Background = ({ children }) => {
           100% {
             transform: perspective(500px) rotateX(15deg) translate3d(0, 0, 0);
           }
-        }
-        
-        @keyframes pulseGlow {
-          0%, 100% { opacity: 0.6; }
-          50% { opacity: 0.8; }
         }
         
         @keyframes float {

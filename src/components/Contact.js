@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Linkedin, Github, Send, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Linkedin, Github, FileText, Award, Zap, Code, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
   const [isHovered, setIsHovered] = useState({
     email: false,
     phone: false,
@@ -18,28 +13,7 @@ const Contact = () => {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Form submission logic would go here
-    console.log('Submitted:', formData);
-    
-    // Reset form after submission
-    setFormData({
-      name: '',
-      email: '',
-      message: ''
-    });
-    
-    // Show success message
-    alert('Thank you for your message! I will get back to you soon.');
-  };
-  
+
   const contactLinks = [
     {
       id: 'email',
@@ -75,6 +49,33 @@ const Contact = () => {
     }
   ];
 
+  const professionalHighlights = [
+    {
+      icon: <FileText size={24} />,
+      title: 'Comprehensive Portfolio',
+      description: 'Explore my detailed professional journey and achievements.',
+      color: 'from-indigo-500 to-purple-500'
+    },
+    {
+      icon: <Award size={24} />,
+      title: 'Certifications & Achievements',
+      description: 'Recognized excellence in technical innovation and problem-solving.',
+      color: 'from-yellow-500 to-orange-500'
+    },
+    {
+      icon: <Zap size={24} />,
+      title: 'Quick Collaboration',
+      description: 'Rapid response and efficient communication channels.',
+      color: 'from-blue-400 to-cyan-500'
+    },
+    {
+      icon: <Code size={24} />,
+      title: 'Technical Consultation',
+      description: 'Expert advice on complex technical challenges and solutions.',
+      color: 'from-green-500 to-emerald-600'
+    }
+  ];
+
   return (
     <section id="contact" className="min-h-screen py-16 bg-gradient-to-br from-indigo-900 to-purple-900 text-white relative overflow-hidden">
       {/* Animated background elements */}
@@ -99,7 +100,7 @@ const Contact = () => {
       <div className={`container mx-auto px-4 md:px-8 relative z-10 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
         <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center relative">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-            Get In Touch
+            Let's Connect
           </span>
           <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-4"></div>
         </h2>
@@ -108,8 +109,8 @@ const Contact = () => {
           {/* Left column with contact info */}
           <div className={`space-y-6 transition-all duration-700 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
             <p className="text-lg mb-8">
-              I'm always interested in new opportunities, collaborations, or just a friendly chat about technology. 
-              Feel free to reach out through any of these channels or use the form to send me a message directly.
+              I'm passionate about creating innovative solutions and connecting with like-minded professionals. 
+              Whether you're looking to collaborate, discuss a project, or explore new opportunities, I'm always eager to engage.
             </p>
             
             <div className="space-y-4">
@@ -131,66 +132,44 @@ const Contact = () => {
                     <p className="text-sm text-white/70">{contact.label}</p>
                     <p className="font-semibold">{contact.value}</p>
                   </div>
-                  <ArrowRight 
-                    size={20} 
-                    className={`transition-all duration-300 transform ${isHovered[contact.id] ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'} text-white/70`} 
-                  />
                 </a>
               ))}
             </div>
           </div>
           
-          {/* Right column with contact form */}
-          <div className={`bg-white/10 rounded-xl p-6 backdrop-blur-sm transition-all duration-700 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-            <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block mb-2 text-sm font-medium text-white/80">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-white/80">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block mb-2 text-sm font-medium text-white/80">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="4"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg p-3 text-white focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all"
-                  placeholder="What would you like to discuss?"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
+          {/* Right column with professional highlights */}
+          <div className={`space-y-6 transition-all duration-700 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
+            <h3 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+              Professional Engagement
+            </h3>
+            <div className="space-y-4">
+              {professionalHighlights.map((highlight, index) => (
+                <div 
+                  key={highlight.title}
+                  className="bg-white/10 rounded-xl p-4 backdrop-blur-sm flex items-center transition-all duration-300 hover:bg-white/20"
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <div className={`w-12 h-12 rounded-full mr-4 flex items-center justify-center bg-gradient-to-br ${highlight.color}`}>
+                    {highlight.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-lg">{highlight.title}</h4>
+                    <p className="text-sm text-white/70">{highlight.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-6">
+              <a 
+                href="/resume.pdf" 
+                target="_blank" 
                 className="w-full flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] group"
               >
-                <span>Send Message</span>
-                <Send size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
-              </button>
-            </form>
+                <MessageSquare size={18} className="mr-2" />
+                <span>Download Resume</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>

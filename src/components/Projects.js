@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Code, Calendar, Truck, Hospital, Github, ExternalLink, ChevronRight } from 'lucide-react';
+import { Code, Calendar, Truck, Hotel, Github, ExternalLink, ChevronRight } from 'lucide-react';
 
-const Projects = () => {
+const Projects: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeProject, setActiveProject] = useState(null);
   const sectionRef = useRef(null);
@@ -30,7 +30,18 @@ const Projects = () => {
     };
   }, []);
   
-  const projects = [
+  interface Project {
+    id: string;
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    tech: string[];
+    color: string;
+    features: string[];
+    status?: string;
+  }
+
+  const projects: Project[] = [
     {
       id: 'tinkerbell',
       title: 'Tinkerbell Vehicle Rental System',
@@ -60,23 +71,25 @@ const Projects = () => {
       ]
     },
     {
-      id: 'hospital',
-      title: 'Hospital Timetable Management System',
-      description: 'Timetable and resource scheduler built with MERN stack and Firebase. Uses Redux for state management and real-time updates.',
-      icon: <Hospital size={24} />,
-      tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Firebase', 'Redux'],
+      id: 'hotel',
+      title: 'Hotel Management System',
+      description: 'A comprehensive hotel management platform leveraging MERN stack and machine learning for intelligent room pricing and reservation management.',
+      icon: <Hotel size={24} />,
+      tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Machine Learning', 'Redux'],
       color: 'from-red-500 to-pink-600',
       features: [
-        'Real-time staff scheduling and management',
-        'Resource allocation for hospital equipment',
-        'Patient appointment tracking system',
-        'Automated conflict resolution for scheduling'
+        'AI-driven dynamic room pricing',
+        'Real-time room reservation & availability tracking',
+        'Advanced guest registration system',
+        'Comprehensive billing and payment integration',
+        'Interactive admin and guest dashboards',
+        'Data visualization with predictive analytics'
       ],
       status: 'Ongoing'
     }
   ];
 
-  const handleProjectHover = (id) => {
+  const handleProjectHover = (id: string | null) => {
     setActiveProject(id);
   };
 

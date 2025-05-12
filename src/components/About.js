@@ -138,7 +138,7 @@ const About = () => {
                     </div>
                     <div>
                       <h3 className="font-bold text-lg">Royal College, Colombo 07</h3>
-                      <p className="text-white/80">GCE A/L Physical Science (1C, 2S)</p>
+                      <p className="text-white/80">GCE A/L Physical Science</p>
                     </div>
                   </div>
                 </div>
