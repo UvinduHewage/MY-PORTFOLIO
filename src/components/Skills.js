@@ -219,7 +219,7 @@ const Skills = () => {
                 <BookOpen size={32} className="mr-3 text-purple-400" />
                 <div className="text-left">
                   <h3 className="text-xl font-semibold mb-1">Currently Learning</h3>
-                  <p className="text-white/80">TypeScript, GraphQL, Next.js, AWS</p>
+                  <p className="text-white/80">React Native, GraphQL, Next.js, AWS</p>
                 </div>
               </div>
             </div>

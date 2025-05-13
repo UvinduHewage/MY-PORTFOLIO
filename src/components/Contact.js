@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Linkedin, Github, FileText, Award, Zap, Code, MessageSquare } from 'lucide-react';
+import { Mail, Phone, Linkedin, Github, FileText, Award, Zap, Code, MessageSquare, Download } from 'lucide-react';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -35,16 +35,16 @@ const Contact = () => {
       id: 'linkedin',
       icon: <Linkedin size={24} />,
       label: 'LinkedIn',
-      value: 'uvindu-udakara-magedara-hewage',
-      href: 'https://www.linkedin.com/in/uvindu-udakara-magedara-hewage',
+      value: 'Uvindu udakara magedara hewage',
+      href: 'https://www.linkedin.com/in/uvindu-udakara-magedara-hewage-89159a308/',
       color: 'from-blue-600 to-blue-800'
     },
     {
       id: 'github',
       icon: <Github size={24} />,
       label: 'GitHub',
-      value: 'U-WarlockX',
-      href: 'https://github.com/U-WarlockX',
+      value: 'UvinduHewage',
+      href: 'https://github.com/UvinduHewage',
       color: 'from-purple-600 to-purple-800'
     }
   ];
@@ -75,6 +75,17 @@ const Contact = () => {
       color: 'from-green-500 to-emerald-600'
     }
   ];
+
+  // Function to handle resume download
+  const handleResumeDownload = () => {
+    // Create an anchor element and set properties for download
+    const link = document.createElement('a');
+    link.href = '../assets/UUM Hewage-CV.pdf'; // Path to your PDF in the public folder
+    link.download = 'Uvindu_Hewage_Resume.pdf'; // Suggested filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section id="contact" className="min-h-screen py-16 bg-gradient-to-br from-indigo-900 to-purple-900 text-white relative overflow-hidden">
@@ -162,11 +173,12 @@ const Contact = () => {
             
             <div className="mt-6">
               <a 
-                href="/resume.pdf" 
-                target="_blank" 
+                href="../assets/UUM Hewage-CV.pdf" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] group"
               >
-                <MessageSquare size={18} className="mr-2" />
+                <Download size={18} className="mr-2" />
                 <span>Download Resume</span>
               </a>
             </div>

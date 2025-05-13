@@ -61,7 +61,7 @@ const Home = () => {
 
   return (
     <Background>
-      <section id="home" className="h-screen flex flex-col justify-center items-center pt-16">
+      <section id="home" className="h-screen flex flex-col justify-center items-center pt-2">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className={`transition-all duration-1000 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>

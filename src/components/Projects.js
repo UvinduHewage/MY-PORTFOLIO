@@ -206,7 +206,7 @@ const Projects: React.FC = () => {
           {/* GitHub link */}
           <div className={`text-center mt-12 transition-all duration-700 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <a 
-              href="https://github.com/U-WarlockX" 
+              href="https://github.com/UvinduHewage" 
               target="_blank" 
               rel="noreferrer"
               className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/15 backdrop-blur-sm rounded-full transition-all duration-300 group"
