@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { Code, Database, Layers, ChevronDown, Github, Linkedin } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { ChevronDown, Github, Linkedin, Mail, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
 import profileImage from '../assets/profile.png';
-import Background from './Background';
 
 const Home = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [typedText, setTypedText] = useState('');
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
   
-  const typingTexts = [
+  const typingTexts = useMemo(() => [
     'Full-Stack Developer',
     'Data Analytics Enthusiast',
     'Software Engineering Student'
-  ];
+  ], []);
   
   // Typing effect
   useEffect(() => {
-    setIsLoaded(true);
-    
     const text = typingTexts[currentTextIndex];
     let typingTimer;
     let deletingTimer;
@@ -50,119 +47,222 @@ const Home = () => {
       clearTimeout(typingTimer);
       clearTimeout(deletingTimer);
     };
-  }, [typedText, isTyping, currentTextIndex]);
+  }, [typedText, isTyping, currentTextIndex, typingTexts]);
   
-  const scrollToNextSection = () => {
-    const aboutSection = document.getElementById('about');
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: 'smooth' });
+  const scrollToNextSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
+  };
+
+  const techStack = [
+    { name: 'React.js', icon: '⚛️' },
+    { name: 'Next.js', icon: '▲' },
+    { name: 'Java', icon: '☕' },
+    { name: 'Node.js', icon: '🟢' },
+    { name: 'MySQL', icon: '🗄️' },
+  ];
+
+  // Import Feather icon for Medium if needed
+  const FileText = () => (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+    </svg>
+  );
+
   return (
-    <Background>
-      <section id="home" className="h-screen flex flex-col justify-center items-center pt-2">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className={`transition-all duration-1000 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              {/* Profile image */}
-              <div className="relative inline-block mb-8">
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 p-1 animate-pulse-slow">
-                  <div className="w-full h-full rounded-full overflow-hidden bg-gray-900">
-                    <img 
-                      src={profileImage} 
-                      alt="Uvindu Hewage" 
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/400"; // Fallback image
-                      }}
-                    />
-                  </div>
-                </div>
-                
-                {/* Social icons */}
-                <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
-                  <a 
-                    href="https://github.com/U-WarlockX" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="bg-gradient-to-br from-gray-700 to-gray-900 p-2 rounded-full hover:scale-110 transition-transform duration-300"
-                  >
-                    <Github size={20} className="text-white" />
-                  </a>
-                  <a 
-                    href="https://www.linkedin.com/in/uvindu-udakara-magedara-hewage" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="bg-gradient-to-br from-blue-600 to-blue-800 p-2 rounded-full hover:scale-110 transition-transform duration-300"
-                  >
-                    <Linkedin size={20} className="text-white" />
-                  </a>
-                </div>
-              </div>
-              
-              {/* Name with animated gradient */}
-              <h1 className="text-5xl md:text-5xl font-bold mb-6 relative">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 animate-gradient-x">
-                  Uvindu Hewage
-                </span>
-              </h1>
-              
-              {/* Typing effect */}
-              <div className="h-14 mb-3">
-                <div className="text-xl md:text-2xl font-medium flex justify-center items-center">
-                  <div className="flex items-center">
-                    <span className="mr-2 text-cyan-200/80">I'm a</span>
-                    <span className="text-white relative">
-                      {typedText}
-                      <span className="absolute right-0 top-0 h-full w-1 bg-cyan-400 animate-blink"></span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Skill icons */}
-              <div className="flex justify-center space-x-6 md:space-x-10 mb-8">
-                <div className={`transition-all duration-500 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '400ms' }}>
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-cyan-400/20 hover:bg-cyan-400/30 transition-colors duration-300 group">
-                    <Code size={32} className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                  <p className="mt-2 text-sm text-cyan-100/70">Development</p>
-                </div>
-                
-                <div className={`transition-all duration-500 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '600ms' }}>
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-400/20 hover:bg-blue-400/30 transition-colors duration-300 group">
-                    <Database size={32} className="text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                  <p className="mt-2 text-sm text-cyan-100/70">Data Analytics</p>
-                </div>
-                
-                <div className={`transition-all duration-500 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '800ms' }}>
-                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-cyan-600/20 hover:bg-cyan-600/30 transition-colors duration-300 group">
-                    <Layers size={32} className="text-cyan-500 group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                  <p className="mt-2 text-sm text-cyan-100/70">Full-Stack</p>
-                </div>
-              </div>
-              
-              {/* CTA button */}
-              <div className={`transition-all duration-700 transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{ transitionDelay: '1000ms' }}>
-                <button 
-                  onClick={scrollToNextSection}
-                  className="px-4 py-2 bg-transparent border border-cyan-500/30 rounded-full hover:bg-cyan-500/10 transition-all duration-300 transform hover:scale-105"
-                >
-                  <span className="flex items-center text-cyan-400 text-sm">
-                    Explore
-                    <ChevronDown size={16} className="ml-2 animate-bounce" />
-                  </span>
-                </button>
-              </div>
+    <section className="relative w-full min-h-screen flex flex-col justify-center items-center py-20 px-4">
+      <motion.div
+        className="max-w-4xl w-full text-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Availability Badge */}
+        <motion.div
+          variants={itemVariants}
+          className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-primary/30 rounded-full bg-primary/10 backdrop-blur-sm"
+        >
+          <motion.div
+            className="w-2.5 h-2.5 bg-green-500 rounded-full"
+            animate={{ scale: [1, 1.3, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+          <span className="text-sm font-medium text-foreground">Associate Software Engineer @ Fentons IT</span>
+        </motion.div>
+
+        {/* Profile Image */}
+        <motion.div variants={itemVariants} className="mb-8 md:mb-12">
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="relative inline-block"
+          >
+            <div className="w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-full overflow-hidden ring-2 ring-primary/40 ring-offset-4 ring-offset-background shadow-2xl">
+              <img
+                src={profileImage}
+                alt="Uvindu Hewage - Software Engineering Student"
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://via.placeholder.com/400';
+                }}
+              />
             </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Name with Gradient */}
+        <motion.div variants={itemVariants}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+            Uvindu Hewage
+          </h1>
+        </motion.div>
+              
+        {/* Typing Effect */}
+        <motion.div variants={itemVariants} className="mb-10 min-h-16 sm:min-h-20 md:min-h-24 flex items-center justify-center px-2">
+          <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground flex flex-wrap justify-center items-center gap-2">
+            <span className="text-muted-foreground">I'm a</span>
+            <span className="text-primary font-bold whitespace-nowrap relative inline-block">
+              {typedText}
+              <motion.span
+                className="absolute w-1 bg-primary"
+                style={{ 
+                  height: '1.2em',
+                  right: typedText ? '-4px' : '-2px'
+                }}
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              />
+            </span>
           </div>
-        </div>
-      </section>
-    </Background>
+        </motion.div>
+              
+        {/* Tech Stack Pills */}
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12">
+          {techStack.map((tech) => (
+            <motion.div
+              key={tech.name}
+              whileHover={{ scale: 1.05 }}
+              className="px-4 py-2 rounded-full border border-border bg-secondary/50 text-secondary-foreground text-sm font-medium hover:bg-secondary transition-colors"
+            >
+              <span className="mr-2">{tech.icon}</span>
+              {tech.name}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center mb-12 md:mb-16">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToNextSection('projects')}
+            className="px-8 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity"
+          >
+            View Projects
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = '/UUMHewage_CV.pdf';
+              link.download = 'UUMHewage_CV.pdf';
+              link.click();
+            }}
+            className="px-8 py-3 rounded-lg border border-border bg-background hover:bg-accent text-foreground font-semibold transition-colors"
+          >
+            Download CV
+          </motion.button>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div variants={itemVariants} className="flex justify-center gap-4 mb-12 md:mb-16">
+          {[
+            {
+              Icon: Mail,
+              href: 'mailto:uvindu.hewage@example.com',
+              label: 'Email',
+              color: 'hover:text-primary',
+            },
+            {
+              Icon: Phone,
+              href: 'tel:+94712345678',
+              label: 'Phone',
+              color: 'hover:text-primary',
+            },
+            {
+              Icon: Github,
+              href: 'https://github.com/UvinduHewage',
+              label: 'GitHub',
+              color: 'hover:text-primary',
+            },
+            {
+              Icon: Linkedin,
+              href: 'https://www.linkedin.com/in/uvindu-hewage-89159a308/',
+              label: 'LinkedIn',
+              color: 'hover:text-primary',
+            },
+            {
+              Icon: FileText,
+              href: 'https://medium.com/@hewageuvindu',
+              label: 'Medium',
+              color: 'hover:text-primary',
+            },
+          ].map(({ Icon, href, label, color }) => (
+            <motion.a
+              key={label}
+              href={href}
+              target={label !== 'Email' && label !== 'Phone' ? '_blank' : undefined}
+              rel={label !== 'Email' && label !== 'Phone' ? 'noreferrer' : undefined}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              className={`p-3 rounded-full border border-border hover:border-primary ${color} transition-colors`}
+              aria-label={label}
+            >
+              <Icon className="w-5 h-5" />
+            </motion.a>
+          ))}
+        </motion.div>
+
+        {/* Scroll Indicator */}
+        <motion.button
+          variants={itemVariants}
+          onClick={() => scrollToNextSection('about')}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 p-3 rounded-full border border-border hover:border-primary hover:bg-accent/50 transition-colors"
+          aria-label="Scroll to next section"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <ChevronDown className="w-5 h-5 text-muted-foreground" />
+          </motion.div>
+        </motion.button>
+      </motion.div>
+    </section>
   );
 };
 

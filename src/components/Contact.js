@@ -1,190 +1,227 @@
-import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Linkedin, Github, FileText, Award, Zap, Code, MessageSquare, Download } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
+import { Mail, Phone, Linkedin, Github, MapPin, Clock, Zap } from 'lucide-react';
 
 const Contact = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState({
-    email: false,
-    phone: false,
-    linkedin: false,
-    github: false
-  });
-  
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const contactLinks = [
+  const contactChannels = [
     {
-      id: 'email',
-      icon: <Mail size={24} />,
+      icon: <Mail size={20} />,
       label: 'Email',
       value: 'hewageuvindu@gmail.com',
       href: 'mailto:hewageuvindu@gmail.com',
-      color: 'from-blue-500 to-blue-600'
+      gradient: 'from-blue-500 to-cyan-500',
+      description: 'Get a response within 24 hours',
     },
     {
-      id: 'phone',
-      icon: <Phone size={24} />,
-      label: 'Phone',
+      icon: <Phone size={20} />,
+      label: 'Phone Call',
       value: '+94 71 945 6781',
       href: 'tel:+94719456781',
-      color: 'from-green-500 to-teal-500'
+      gradient: 'from-green-500 to-emerald-500',
+      description: 'Available for quick calls',
     },
     {
-      id: 'linkedin',
-      icon: <Linkedin size={24} />,
+      icon: <Linkedin size={20} />,
       label: 'LinkedIn',
-      value: 'Uvindu udakara magedara hewage',
-      href: 'https://www.linkedin.com/in/uvindu-udakara-magedara-hewage-89159a308/',
-      color: 'from-blue-600 to-blue-800'
+      value: 'Uvindu Hewage',
+      href: 'https://www.linkedin.com/in/uvindu-hewage-89159a308/',
+      gradient: 'from-blue-600 to-blue-700',
+      description: 'Connect professionally',
     },
     {
-      id: 'github',
-      icon: <Github size={24} />,
+      icon: <Github size={20} />,
       label: 'GitHub',
       value: 'UvinduHewage',
       href: 'https://github.com/UvinduHewage',
-      color: 'from-purple-600 to-purple-800'
-    }
+      gradient: 'from-purple-600 to-pink-600',
+      description: 'Check out my projects',
+    },
   ];
 
-  const professionalHighlights = [
+  const infoCards = [
     {
-      icon: <FileText size={24} />,
-      title: 'Comprehensive Portfolio',
-      description: 'Explore my detailed professional journey and achievements.',
-      color: 'from-indigo-500 to-purple-500'
+      icon: <MapPin size={20} className="text-blue-500" />,
+      title: 'Location',
+      value: 'Sri Lanka',
     },
     {
-      icon: <Award size={24} />,
-      title: 'Certifications & Achievements',
-      description: 'Recognized excellence in technical innovation and problem-solving.',
-      color: 'from-yellow-500 to-orange-500'
+      icon: <Clock size={20} className="text-green-500" />,
+      title: 'Response Time',
+      value: '24-48 hours',
     },
     {
-      icon: <Zap size={24} />,
-      title: 'Quick Collaboration',
-      description: 'Rapid response and efficient communication channels.',
-      color: 'from-blue-400 to-cyan-500'
+      icon: <Zap size={20} className="text-yellow-500" />,
+      title: 'Status',
+      value: 'Available for Projects',
     },
-    {
-      icon: <Code size={24} />,
-      title: 'Technical Consultation',
-      description: 'Expert advice on complex technical challenges and solutions.',
-      color: 'from-green-500 to-emerald-600'
-    }
   ];
 
-  // Function to handle resume download
-  const handleResumeDownload = () => {
-    // Create an anchor element and set properties for download
-    const link = document.createElement('a');
-    link.href = '../assets/UUM Hewage-CV.pdf'; // Path to your PDF in the public folder
-    link.download = 'Uvindu_Hewage_Resume.pdf'; // Suggested filename
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
   };
 
   return (
-    <section id="contact" className="min-h-screen py-16 bg-gradient-to-br from-indigo-900 to-purple-900 text-white relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        {[...Array(15)].map((_, i) => (
-          <div 
-            key={i}
-            className="absolute rounded-full bg-white/5 animate-pulse"
-            style={{
-              width: `${Math.random() * 300 + 50}px`,
-              height: `${Math.random() * 300 + 50}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 8 + 5}s`,
-              animationDelay: `${Math.random() * 5}s`,
-              opacity: Math.random() * 0.1 + 0.05
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className={`container mx-auto px-4 md:px-8 relative z-10 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-        <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center relative">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-            Let's Connect
-          </span>
-          <div className="h-1 w-24 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto mt-4"></div>
-        </h2>
-        
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left column with contact info */}
-          <div className={`space-y-6 transition-all duration-700 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-            <p className="text-lg mb-8">
-              I'm passionate about creating innovative solutions and connecting with like-minded professionals. 
-              Whether you're looking to collaborate, discuss a project, or explore new opportunities, I'm always eager to engage.
-            </p>
-            
-            <div className="space-y-4">
-              {contactLinks.map((contact, index) => (
-                <a
-                  key={contact.id}
-                  href={contact.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`flex items-center p-4 rounded-xl transition-all duration-300 bg-white/10 backdrop-blur-sm hover:bg-white/20 group`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                  onMouseEnter={() => setIsHovered(prev => ({ ...prev, [contact.id]: true }))}
-                  onMouseLeave={() => setIsHovered(prev => ({ ...prev, [contact.id]: false }))}
-                >
-                  <div className={`w-12 h-12 rounded-full mr-4 flex items-center justify-center bg-gradient-to-br ${contact.color}`}>
-                    {contact.icon}
+    <section id="contact" className="min-h-screen py-20 px-4 md:px-8 relative overflow-hidden">
+      <motion.div
+        className="max-w-7xl mx-auto relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {/* Header */}
+        <motion.div variants={itemVariants} className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-foreground via-primary to-foreground/60 bg-clip-text text-transparent">
+              Get In Touch
+            </span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+            Whether you have a project idea, want to collaborate, or just want to say hello—I'm always excited to connect with talented people. Reach out through any channel that works best for you.
+          </p>
+        </motion.div>
+
+        {/* Contact Channels Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {contactChannels.map((channel, idx) => (
+            <motion.a
+              key={channel.label}
+              href={channel.href}
+              target={channel.label !== 'Email' && channel.label !== 'Phone Call' ? '_blank' : undefined}
+              rel={channel.label !== 'Email' && channel.label !== 'Phone Call' ? 'noreferrer' : undefined}
+              variants={itemVariants}
+              whileHover={{ y: -8 }}
+            >
+              <Card className="h-full group cursor-pointer overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl">
+                <div className={`h-1 bg-gradient-to-r ${channel.gradient}`} />
+                <CardContent className="p-5 flex flex-col justify-between h-full">
+                  <div>
+                    <motion.div
+                      className={`w-11 h-11 rounded-lg bg-gradient-to-br ${channel.gradient} flex items-center justify-center text-white mb-3.5`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      {channel.icon}
+                    </motion.div>
+                    <h3 className="font-semibold text-base mb-1 group-hover:text-primary transition-colors leading-tight">
+                      {channel.label}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed min-h-[2.5rem]">
+                      {channel.description}
+                    </p>
                   </div>
-                  <div className="flex-grow">
-                    <p className="text-sm text-white/70">{contact.label}</p>
-                    <p className="font-semibold">{contact.value}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-          
-          {/* Right column with professional highlights */}
-          <div className={`space-y-6 transition-all duration-700 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-            <h3 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              Professional Engagement
-            </h3>
-            <div className="space-y-4">
-              {professionalHighlights.map((highlight, index) => (
-                <div 
-                  key={highlight.title}
-                  className="bg-white/10 rounded-xl p-4 backdrop-blur-sm flex items-center transition-all duration-300 hover:bg-white/20"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <div className={`w-12 h-12 rounded-full mr-4 flex items-center justify-center bg-gradient-to-br ${highlight.color}`}>
-                    {highlight.icon}
+                  <p className="font-semibold text-foreground text-sm break-words leading-tight">
+                    {channel.value}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.a>
+          ))}
+        </motion.div>
+
+        {/* Info Cards */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {infoCards.map((info, idx) => (
+            <motion.div key={idx} variants={itemVariants}>
+              <Card className="h-full hover:shadow-lg transition-all duration-300 border border-border/50 hover:border-primary/50">
+                <CardContent className="p-5 flex flex-col items-center justify-center text-center space-y-2.5">
+                  <div className="w-11 h-11 rounded-lg bg-secondary flex items-center justify-center">
+                    {info.icon}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg">{highlight.title}</h4>
-                    <p className="text-sm text-white/70">{highlight.description}</p>
+                    <p className="text-sm text-muted-foreground leading-tight">{info.title}</p>
+                    <p className="font-semibold text-foreground text-sm mt-1 leading-tight">{info.value}</p>
                   </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-6">
-              <a 
-                href="../assets/UUM Hewage-CV.pdf" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-[1.02] group"
-              >
-                <Download size={18} className="mr-2" />
-                <span>Download Resume</span>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/30 rounded-2xl p-8 md:p-12 text-center"
+        >
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Project?</h3>
+          <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
+            I'm actively looking for new opportunities. Let's discuss how I can help bring your vision to life.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap items-center">
+            <Button
+              asChild
+              size="lg"
+              className="gap-2.5 text-base px-7"
+            >
+              <a href="mailto:hewageuvindu@gmail.com" className="inline-flex items-center justify-center gap-2.5 leading-none">
+                <Mail size={19} />
+                Send Me an Email
               </a>
-            </div>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="gap-2.5 text-base px-7"
+            >
+              <a href="tel:+94719456781" className="inline-flex items-center justify-center gap-2.5 leading-none">
+                <Phone size={19} />
+                Call Me
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="gap-2.5 text-base px-7"
+            >
+              <a href="https://www.linkedin.com/in/uvindu-hewage-89159a308/" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2.5 leading-none">
+                <Linkedin size={19} />
+                LinkedIn
+              </a>
+            </Button>
           </div>
-        </div>
-      </div>
+        </motion.div>
+
+        {/* CTA Footer */}
+        <motion.div
+          variants={itemVariants}
+          className="text-center pt-8 border-t border-border/50"
+        >
+          <p className="text-muted-foreground mb-4">
+            Looking forward to connecting with you. Let's create something amazing!
+          </p>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

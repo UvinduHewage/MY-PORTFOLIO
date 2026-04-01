@@ -1,87 +1,185 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Background = ({ children }) => {
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    // Check for dark mode preference
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+
+    checkDarkMode();
+
+    // Listen for theme changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Grid Background - Fixed position to cover entire page */}
-      <div className="fixed inset-0 grid-background">
-        <div className="animated-grid"></div>
+    <div className="relative min-h-screen w-full overflow-hidden bg-background">
+      {/* Main gradient background */}
+      <div className="fixed inset-0 z-0">
+        {/* Base background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-background" />
+
+        {/* Animated gradient overlay - Dark mode */}
+        {isDark && (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-accent/5 to-primary/20 animate-gradient-shift" />
+        )}
+
+        {/* Animated gradient overlay - Light mode */}
+        {!isDark && (
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/70 via-purple-50/60 to-blue-50/80 animate-gradient-shift" />
+        )}
+
+        {/* Colorful accent blobs - dark mode */}
+        {isDark && (
+          <>
+            <div className="absolute top-20 -left-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-blob" />
+            <div className="absolute top-40 -right-40 w-80 h-80 bg-accent/20 rounded-full blur-3xl animate-blob-delayed" />
+            <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-primary/15 rounded-full blur-3xl animate-blob-slow" />
+            <div className="absolute bottom-40 right-1/4 w-96 h-96 bg-accent/15 rounded-full blur-3xl animate-blob" style={{ animationDelay: '1.5s' }} />
+          </>
+        )}
+
+        {/* Colorful accent blobs - light mode with vibrant colors */}
+        {!isDark && (
+          <>
+            <div className="absolute top-20 -left-40 w-80 h-80 bg-blue-400/45 rounded-full blur-3xl animate-blob" />
+            <div className="absolute top-40 -right-40 w-80 h-80 bg-purple-400/45 rounded-full blur-3xl animate-blob-delayed" />
+            <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-cyan-400/40 rounded-full blur-3xl animate-blob-slow" />
+            <div className="absolute bottom-40 right-1/4 w-96 h-96 bg-indigo-400/40 rounded-full blur-3xl animate-blob" style={{ animationDelay: '1.5s' }} />
+          </>
+        )}
+
+        {/* Grid pattern overlay - more visible in light mode */}
+        <div className={isDark ? 'absolute inset-0 opacity-30 dark:opacity-20' : 'absolute inset-0 opacity-30'}>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(59, 130, 246, ${isDark ? '0.15' : '0.14'}) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, ${isDark ? '0.15' : '0.14'}) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+              backgroundPosition: '0 0',
+            }}
+          />
+        </div>
+
+        {/* Radial gradient center - different for light and dark */}
+        {isDark && <div className="absolute inset-0 bg-radial-gradient opacity-60" />}
+        {!isDark && <div className="absolute inset-0 bg-radial-gradient-light opacity-40" />}
       </div>
-      
-      {/* Glow Effect - Fixed position to cover entire page */}
-      <div className="fixed inset-0 glow-effect"></div>
-      
+
       {/* Content */}
       <div className="relative z-10 min-h-screen w-full">
         {children}
       </div>
-      
-      {/* Custom animation CSS */}
-      <style jsx>{`
-        .grid-background {
-          background-color: #000;
-          overflow: hidden;
-          z-index: 1;
-        }
-        
-        .animated-grid {
-          position: absolute;
-          inset: -50%;
-          width: 200%;
-          height: 200%;
-          background-image: linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
-          background-size: 40px 40px;
-          animation: gridAnimation 20s linear infinite;
-        }
-        
-        .glow-effect {
-          background: radial-gradient(circle at center, rgba(0, 212, 255, 0.1) 0%, rgba(0, 0, 0, 0.9) 70%);
-          opacity: 0.6;
-          z-index: 2;
-        }
-        
-        @keyframes gridAnimation {
-          0% {
-            transform: perspective(500px) rotateX(15deg) translate3d(-5%, -5%, 0);
+
+      {/* Styles */}
+      <style>{`
+        @keyframes gradient-shift {
+          0%, 100% {
+            opacity: 1;
           }
-          100% {
-            transform: perspective(500px) rotateX(15deg) translate3d(0, 0, 0);
+          50% {
+            opacity: 0.9;
           }
         }
-        
-        @keyframes float {
-          0% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-          100% { transform: translateY(0px); }
+
+        @keyframes blob {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.7;
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+            opacity: 0.5;
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.95);
+            opacity: 0.6;
+          }
         }
-        
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
+
+        @keyframes blob-delayed {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.7;
+          }
+          33% {
+            transform: translate(-30px, 50px) scale(0.95);
+            opacity: 0.5;
+          }
+          66% {
+            transform: translate(20px, -20px) scale(1.1);
+            opacity: 0.6;
+          }
         }
-        
-        @keyframes gradient-x {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+
+        @keyframes blob-slow {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+            opacity: 0.6;
+          }
+          50% {
+            transform: translate(20px, 30px) scale(1.05);
+            opacity: 0.4;
+          }
         }
-        
-        .animate-pulse-slow {
-          animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+        .animate-gradient-shift {
+          animation: gradient-shift 8s ease-in-out infinite;
         }
-        
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 8s ease infinite;
+
+        .animate-blob {
+          animation: blob 9s ease-in-out infinite;
         }
-        
-        .animate-blink {
-          animation: blink 1s step-end infinite;
+
+        .animate-blob-delayed {
+          animation: blob-delayed 8s ease-in-out infinite;
+          animation-delay: 2s;
         }
-        
-        .animate-float-slow {
-          animation: float 6s ease-in-out infinite;
+
+        .animate-blob-slow {
+          animation: blob-slow 12s ease-in-out infinite;
+          animation-delay: 1s;
+        }
+
+        .bg-radial-gradient {
+          background: radial-gradient(circle at 50% 50%, 
+            rgba(var(--primary-rgb, 59, 130, 246), 0.25) 0%, 
+            rgba(var(--background), 0) 70%
+          );
+        }
+
+        .bg-radial-gradient-light {
+          background: radial-gradient(circle at 50% 50%, 
+            rgba(59, 130, 246, 0.2) 0%, 
+            rgba(255, 255, 255, 0) 70%
+          );
+        }
+
+        /* Respect user's motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+          .animate-gradient-shift,
+          .animate-blob,
+          .animate-blob-delayed,
+          .animate-blob-slow {
+            animation: none !important;
+            opacity: 0.4 !important;
+          }
+        }
+
+        /* Subtle grid pattern - CSS only for better performance */
+        @media (max-width: 768px) {
+          [style*="backgroundImage"] {
+            background-size: 40px 40px !important;
+          }
         }
       `}</style>
     </div>
