@@ -135,7 +135,7 @@ const Home = () => {
 
         {/* Name with Gradient */}
         <motion.div variants={itemVariants}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent break-words leading-tight px-2">
             Uvindu Hewage
           </h1>
         </motion.div>
