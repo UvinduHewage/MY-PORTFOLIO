@@ -47,12 +47,10 @@ export default function Navbar() {
     });
 
     return () => {
-      return () => {
-        navItems.forEach((item) => {
-          const element = document.getElementById(item.id);
-          if (element) observer.unobserve(element);
-        });
-      };
+      navItems.forEach((item) => {
+        const element = document.getElementById(item.id);
+        if (element) observer.unobserve(element);
+      });
     }
   }, [navItems]);
 

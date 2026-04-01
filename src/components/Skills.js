@@ -6,62 +6,6 @@ const Skills = () => {
   const [animatedValues, setAnimatedValues] = useState({});
   const [isInView, setIsInView] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    const section = document.getElementById('skills');
-    if (section) observer.observe(section);
-
-    return () => {
-      if (section) observer.unobserve(section);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isInView) {
-      skillCategories.forEach((category) => {
-        category.skills.forEach((skill) => {
-          const key = `${category.id}-${skill.name}`;
-          const timer = setTimeout(() => {
-            setAnimatedValues((prev) => ({
-              ...prev,
-              [key]: skill.proficiency,
-            }));
-          }, 100);
-          return () => clearTimeout(timer);
-        });
-      });
-    }
-  }, [isInView]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
-
   const skillCategories = useMemo(() => [
     {
       id: 'languages',
@@ -147,6 +91,62 @@ const Skills = () => {
       ],
     },
   ], []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const section = document.getElementById('skills');
+    if (section) observer.observe(section);
+
+    return () => {
+      if (section) observer.unobserve(section);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isInView) {
+      skillCategories.forEach((category) => {
+        category.skills.forEach((skill) => {
+          const key = `${category.id}-${skill.name}`;
+          const timer = setTimeout(() => {
+            setAnimatedValues((prev) => ({
+              ...prev,
+              [key]: skill.proficiency,
+            }));
+          }, 100);
+          return () => clearTimeout(timer);
+        });
+      });
+    }
+  }, [isInView, skillCategories]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
+  };
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center py-24 px-4">
