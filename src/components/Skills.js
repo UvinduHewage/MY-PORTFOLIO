@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
-import { Progress } from './ui/progress';
 
 const Skills = () => {
   const [animatedValues, setAnimatedValues] = useState({});
@@ -63,7 +62,7 @@ const Skills = () => {
     },
   };
 
-  const skillCategories = [
+  const skillCategories = useMemo(() => [
     {
       id: 'languages',
       title: 'Languages',
@@ -147,7 +146,7 @@ const Skills = () => {
         { name: 'LLM Integration', proficiency: 70 },
       ],
     },
-  ];
+  ], []);
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center py-24 px-4">

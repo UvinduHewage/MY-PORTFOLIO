@@ -5,7 +5,6 @@ import { Badge } from './ui/badge';
 import { Truck, Hotel, Github, ExternalLink, Star, Zap, Building2 } from 'lucide-react';
 
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [activeProject, setActiveProject] = useState(null);
   const sectionRef = useRef(null);
   
@@ -13,7 +12,6 @@ const Projects = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
           observer.unobserve(entry.target);
         }
       },
@@ -22,13 +20,14 @@ const Projects = () => {
       }
     );
     
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

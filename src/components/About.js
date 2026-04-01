@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Trophy, Star, BookOpen, Code, Database, Users } from 'lucide-react';
+import { Trophy, BookOpen, Code, Database, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './ui/card';
+import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
-import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
 import { Separator } from './ui/separator';
-import profileImage from '../assets/profile.png';
 
 const About = () => {
   const [activeTab, setActiveTab] = useState('personal');

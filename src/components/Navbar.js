@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ModeToggle } from './ui/ModeToggle';
@@ -8,13 +8,13 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
     { id: 'contact', label: 'Contact' },
-  ];
+  ], []);
 
   // Track window resize
   useEffect(() => {
@@ -47,12 +47,14 @@ export default function Navbar() {
     });
 
     return () => {
-      navItems.forEach((item) => {
-        const element = document.getElementById(item.id);
-        if (element) observer.unobserve(element);
-      });
-    };
-  }, []);
+      return () => {
+        navItems.forEach((item) => {
+          const element = document.getElementById(item.id);
+          if (element) observer.unobserve(element);
+        });
+      };
+    }
+  }, [navItems]);
 
   const handleNavClick = (sectionId) => {
     const element = document.getElementById(sectionId);
