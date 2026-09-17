@@ -12,7 +12,7 @@ const Contact = () => {
       value: 'hewageuvindu@gmail.com',
       href: 'mailto:hewageuvindu@gmail.com',
       gradient: 'from-blue-500 to-cyan-500',
-      description: 'Get a response within 24 hours',
+      description: 'Best for project details and collaboration requests',
     },
     {
       icon: <Phone size={20} />,
@@ -20,7 +20,7 @@ const Contact = () => {
       value: '+94 71 945 6781',
       href: 'tel:+94719456781',
       gradient: 'from-green-500 to-emerald-500',
-      description: 'Available for quick calls',
+      description: 'For a quick conversation about your project',
     },
     {
       icon: <Linkedin size={20} />,
@@ -28,7 +28,7 @@ const Contact = () => {
       value: 'Uvindu Hewage',
       href: 'https://www.linkedin.com/in/uvindu-hewage-89159a308/',
       gradient: 'from-blue-600 to-blue-700',
-      description: 'Connect professionally',
+      description: 'Connect and view my professional background',
     },
     {
       icon: <Github size={20} />,
@@ -36,7 +36,7 @@ const Contact = () => {
       value: 'UvinduHewage',
       href: 'https://github.com/UvinduHewage',
       gradient: 'from-purple-600 to-pink-600',
-      description: 'Check out my projects',
+      description: 'Browse the code behind my projects',
     },
   ];
 
@@ -48,13 +48,13 @@ const Contact = () => {
     },
     {
       icon: <Clock size={20} className="text-green-500" />,
-      title: 'Response Time',
-      value: '24-48 hours',
+      title: 'Best contact',
+      value: 'Email for project details',
     },
     {
       icon: <Zap size={20} className="text-yellow-500" />,
-      title: 'Status',
-      value: 'Available for Projects',
+      title: 'Focus',
+      value: 'Full-stack web development',
     },
   ];
 
@@ -91,11 +91,11 @@ const Contact = () => {
         <motion.div variants={itemVariants} className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-foreground via-primary to-foreground/60 bg-clip-text text-transparent">
-              Get In Touch
+              Discuss your next web project
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Whether you have a project idea, want to collaborate, or just want to say hello—I'm always excited to connect with talented people. Reach out through any channel that works best for you.
+            If you need help building or improving a web application, send the project context by email. I will review it and get back to you.
           </p>
         </motion.div>
 
@@ -172,9 +172,9 @@ const Contact = () => {
           variants={itemVariants}
           className="bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 border border-primary/30 rounded-2xl p-8 md:p-12 text-center"
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Project?</h3>
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">Have a project to discuss?</h3>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm actively looking for new opportunities. Let's discuss how I can help bring your vision to life.
+            Share the problem, the users, and the outcome you need. Email is best for a useful first conversation.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap items-center">
             <Button
@@ -184,7 +184,7 @@ const Contact = () => {
             >
               <a href="mailto:hewageuvindu@gmail.com" className="inline-flex items-center justify-center gap-2.5 leading-none">
                 <Mail size={19} />
-                Send Me an Email
+                Email your project details
               </a>
             </Button>
             <Button
@@ -195,7 +195,7 @@ const Contact = () => {
             >
               <a href="tel:+94719456781" className="inline-flex items-center justify-center gap-2.5 leading-none">
                 <Phone size={19} />
-                Call Me
+                Call to discuss your project
               </a>
             </Button>
             <Button
@@ -218,7 +218,7 @@ const Contact = () => {
           className="text-center pt-8 border-t border-border/50"
         >
           <p className="text-muted-foreground mb-4">
-            Looking forward to connecting with you. Let's create something amazing!
+            Prefer email? It is the clearest way to share the details I need.
           </p>
         </motion.div>
       </motion.div>

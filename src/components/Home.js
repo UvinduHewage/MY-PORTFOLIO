@@ -10,7 +10,6 @@ const Home = () => {
   
   const typingTexts = useMemo(() => [
     'Full-Stack Developer',
-    'Data Analytics Enthusiast',
     'Software Engineering Student'
   ], []);
   
@@ -109,7 +108,7 @@ const Home = () => {
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
-          <span className="text-sm font-medium text-foreground">Associate Software Engineer @ Fentons IT</span>
+          <span className="text-sm font-medium text-foreground">Associate Software Engineer at Fentons IT</span>
         </motion.div>
 
         {/* Profile Image */}
@@ -136,14 +135,14 @@ const Home = () => {
         {/* Name with Gradient */}
         <motion.div variants={itemVariants}>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/60 bg-clip-text text-transparent break-words leading-tight px-2">
-            Uvindu Hewage
+            Full-stack web development for teams that need dependable software
           </h1>
         </motion.div>
               
         {/* Typing Effect */}
         <motion.div variants={itemVariants} className="mb-10 min-h-16 sm:min-h-20 md:min-h-24 flex items-center justify-center px-2">
           <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground flex flex-wrap justify-center items-center gap-2">
-            <span className="text-muted-foreground">I'm a</span>
+            <span className="text-muted-foreground">I am Uvindu Hewage, a</span>
             <span className="text-primary font-bold whitespace-nowrap relative inline-block">
               {typedText}
               <motion.span

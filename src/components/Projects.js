@@ -35,9 +35,9 @@ const Projects = () => {
   const projects = [
     {
       id: 'cpm-system',
-      title: 'CPM System - Comprehensive Project Management Platform',
-      description: 'Enterprise-grade web application for managing complex construction and infrastructure projects. Features role-based access control, real-time collaboration, financial monitoring, procurement, compliance tracking, and multi-level reporting dashboards.',
-      shortDesc: 'Enterprise project management platform for construction teams',
+      title: 'Construction Project Management System',
+      description: 'A web platform for construction teams to organise project work, financial records, procurement, issues, and documents in one place.',
+      shortDesc: 'Keep project work and records organised',
       icon: <Building2 size={24} />,
       tech: ['Next.js 15', 'React 18', 'Express.js', 'MySQL', 'TailwindCSS', 'ShadCN UI', 'AWS S3'],
       gradient: 'from-cyan-900 to-slate-900',
@@ -56,8 +56,8 @@ const Projects = () => {
     {
       id: 'construction-ai',
       title: 'Smart Construction Intelligence System',
-      description: 'AI-powered microservices platform for construction project optimization. Predicts costs, resources, timelines, and material quality using ML models. Team research project with 4 specialized backend services + Flutter frontend.',
-      shortDesc: 'AI-driven construction management with cost/resource prediction',
+      description: 'A team research project exploring machine-learning services for construction costs, resources, timelines, and material quality.',
+      shortDesc: 'Explore construction data with ML services',
       icon: <Zap size={24} />,
       tech: ['FastAPI', 'Python', 'XGBoost', 'Flutter', 'MongoDB', 'OpenCV', 'Machine Learning'],
       gradient: 'from-amber-900 to-slate-900',
@@ -76,8 +76,8 @@ const Projects = () => {
     {
       id: 'tinkerbell',
       title: 'Tinkerbell Vehicle Rental System',
-      description: 'Developed a full-stack rental platform with booking management, user authentication, and vehicle availability checks.',
-      shortDesc: 'Complete rental platform with secure booking system',
+      description: 'A full-stack rental platform with booking management, user authentication, and vehicle-availability checks.',
+      shortDesc: 'Manage vehicle bookings and availability',
       icon: <Truck size={24} />,
       tech: ['PHP', 'JavaScript', 'MySQL', 'HTML/CSS'],
       gradient: 'from-blue-900 to-slate-900',
@@ -94,8 +94,8 @@ const Projects = () => {
     {
       id: 'community',
       title: 'Sustainable Community Management',
-      description: 'Full-stack system for community event scheduling with real-time data management and interactive dashboards.',
-      shortDesc: 'Community resource management platform',
+      description: 'A full-stack system for scheduling community events, tracking resources, and presenting information in dashboards.',
+      shortDesc: 'Plan events and track shared resources',
       icon: <Star size={24} />,
       tech: ['Node.js', 'React.js', 'MongoDB', 'Redux', 'Tailwind CSS'],
       gradient: 'from-green-900 to-slate-900',
@@ -112,8 +112,8 @@ const Projects = () => {
     {
       id: 'hotel',
       title: 'Hotel Management System',
-      description: 'Comprehensive MERN-based platform with ML-driven dynamic pricing and real-time reservation management.',
-      shortDesc: 'AI-powered hotel management platform',
+      description: 'An in-progress MERN project for hotel reservations, guest records, administration, and dynamic-pricing experiments.',
+      shortDesc: 'Manage reservations and hotel operations',
       icon: <Hotel size={24} />,
       tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Machine Learning'],
       gradient: 'from-purple-900 to-slate-900',
@@ -174,7 +174,7 @@ const Projects = () => {
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A selection of recent projects showcasing my skills in full-stack development, system design, and innovative solutions.
+            Selected work across full-stack web applications, construction systems, and data-driven product ideas.
           </p>
         </motion.div>
 
@@ -286,7 +286,7 @@ const Projects = () => {
                       whileTap={{ scale: 0.95 }}
                     >
                       <Github size={16} />
-                      <span>Code</span>
+                      <span>View code</span>
                     </motion.a>
                     <motion.a
                       href={project.demo}
@@ -297,7 +297,7 @@ const Projects = () => {
                       whileTap={{ scale: 0.95 }}
                     >
                       <ExternalLink size={16} />
-                      <span>Demo</span>
+                      <span>View demo</span>
                     </motion.a>
                   </div>
                 </CardContent>
