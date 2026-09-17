@@ -2,7 +2,7 @@
   "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://uvinduhewage.github.io/MY-PORTFOLIO",
+  "homepage": "https://my-portfolio-nine-gray-73.vercel.app",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@radix-ui/react-avatar": "^1.1.11",

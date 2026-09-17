@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ModeToggle } from './ui/ModeToggle';
+import personalLogo from '../logoNew.png';
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
@@ -69,6 +70,7 @@ export default function Navbar() {
       {!isMobile && (
         <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-background/80 backdrop-blur-md border border-border rounded-full shadow-sm px-6 py-3">
           <div className="flex items-center gap-2">
+            <img src={personalLogo} alt="Uvindu Hewage" className="w-8 h-8 rounded-lg" />
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -92,8 +94,9 @@ export default function Navbar() {
       {isMobile && (
         <>
           <nav className="fixed top-3 left-4 right-4 z-50 bg-background/80 backdrop-blur-md border border-border rounded-xl shadow-sm px-3 py-2 flex items-center justify-between">
-            <span className="text-xs font-semibold text-foreground">Menu</span>
+            <div className="flex items-center gap-2"><img src={personalLogo} alt="Uvindu Hewage" className="w-7 h-7 rounded-md" /><span className="text-xs font-semibold text-foreground">Menu</span></div>
             <div className="flex items-center gap-2">
+            <img src={personalLogo} alt="Uvindu Hewage" className="w-8 h-8 rounded-lg" />
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="p-1.5 rounded-lg hover:bg-accent transition-colors"

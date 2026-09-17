@@ -187,8 +187,8 @@ const Home = () => {
             whileTap={{ scale: 0.95 }}
             onClick={() => {
               const link = document.createElement('a');
-              link.href = '/UUMHewage_CV.pdf';
-              link.download = 'UUMHewage_CV.pdf';
+              link.href = '/Uvindu_Hewage_CV.pdf';
+              link.download = 'Uvindu_Hewage_CV.pdf';
               link.click();
             }}
             className="px-8 py-3 rounded-lg border border-border bg-background hover:bg-accent text-foreground font-semibold transition-colors"
